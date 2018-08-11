@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: bash -c "npm run dev"
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/nuxt-level-recipes
+    environment:
+      - HOST=0.0.0.0
+
+# Notify container when file changes on windows
+# https://github.com/ITISFoundation/osparc-simcore/issues/93
+# pip install docker-windows-volume-watcher
+# docker-volume-watcher
