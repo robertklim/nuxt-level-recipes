@@ -5,7 +5,7 @@
             :key="recipe.id"
             :thumbnail="recipe.thumbnail"
             :title="recipe.title"
-            :previewText="recipe.previewtext"
+            :previewText="recipe.previewText"
             :category="recipe.category"
             :id="recipe.id"
         />
