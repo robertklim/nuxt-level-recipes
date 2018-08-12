@@ -1,29 +1,21 @@
 <template>
-    <section class="recipes">
-        <Recipe 
-            v-for="recipe in recipes"
-            :key="recipe.id"
-            :thumbnail="recipe.thumbnail"
-            :title="recipe.title"
-            :previewText="recipe.previewtext"
-            :category="recipe.category"
-            :id="recipe.id"
-        />
+    <section class="single-recipe">
+        <h3>{{ recipe.title }}</h3>
+        <div>
+            <img class="recipe-image" :src="recipe.thumbnail + recipe.category" :alt="recipe.title">
+        </div>
+        <p>{{ recipe.previewText }}</p>
     </section>
 </template>
 
 <script>
-import Recipe from '@/components/Recipe';
 export default {
-    components: {
-        Recipe,
-    },
     // Lets fake getting data from server
-    asyncData() {
+    asyncData(context) {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve({
-                    recipes: [
+                    recipe: [
                         {
                             id: "1",
                             title: "Recipe 1",
@@ -66,7 +58,7 @@ export default {
                             thumbnail: "https://source.unsplash.com/1600x900/?",
                             category: "cake",
                         },
-                    ]
+                    ].find(el => el.id === context.params.id)
                 })
             }, 1500)
         })
@@ -74,11 +66,17 @@ export default {
 }
 </script>
 
-<style scoped>
-    .recipes {
+
+<style>
+    .single-recipe {
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column;
         justify-content: center;
         align-items: center;
+        text-align: center;
+        padding: 30px;
+    }
+    .recipe-image {
+        width: 100%;
     }
 </style>
